@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('keterangan');
             $table->integer('jumlah_pengeluaran');
             $table->timestamps();
+            $table->bigInteger('id_user')->unsigned()->nullable();
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

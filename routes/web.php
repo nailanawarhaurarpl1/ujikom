@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PemasukanController;
@@ -111,3 +112,8 @@ Route::get('/pengingat', function () {
 Route::get('/laporan', function () {
     return view('member.laporan');
 });
+
+Route::get('/laporan', [LaporanController::class, 'index']);
+Route::get('/laporan/filter', [LaporanController::class, 'filter']);
+
+

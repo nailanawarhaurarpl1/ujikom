@@ -2,88 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pemasukan;
-use App\Models\Kategori;
 use Illuminate\Http\Request;
+use App\Models\Pemasukan;
+use Illuminate\Support\Facades\Auth;
 
 class PemasukanController extends Controller
 {
+    public function getAllPemasukan()
+    {
+        $pemasukan = Pemasukan::where('id_user', auth()->id())->get();
+        return response()->json(['data' => $pemasukan], 200);
+    }
+
     public function destroy($id)
-{
-    $pemasukan = Pemasukan::findOrFail($id);
-    $pemasukan->delete();
-
-    return redirect('/pemasukan')->with('success', 'Pemasukan berhasil dihapus');
-}
-
-
-    public function edit($id)
     {
-        $pemasukan = Pemasukan::find($id);
-        return view('member.editpemasukan', compact('pemasukan'));
+        try {
+            $pemasukan = Pemasukan::where('id', $id)->where('id_user', auth()->id())->firstOrFail();
+            $pemasukan->delete();
+            return response()->json(['message' => 'Pemasukan berhasil dihapus'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal menghapus pemasukan'], 500);
+        }
     }
 
-    public function index()
-    {
-        $pemasukan = Pemasukan::all();
-    
-        // Menghitung total jumlah pemasukan
-        $totalPemasukan = Pemasukan::sum('jumlah_pemasukan');
-    
-        // Pass data pemasukan dan total jumlah pemasukan ke view
-        return view('member.pemasukan', compact('pemasukan', 'totalPemasukan'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function update(Request $request, $id)
     {
-        $pemasukan = Pemasukan::find($id);
-        $pemasukan->nama = $request->input('nama');
-        $pemasukan->jumlah_pemasukan = $request-> input('jumlah_pemasukan');
-        // $pemasukan->tanggal = $request->inpu('tanggal');
+        // Temukan pemasukan berdasarkan ID dan ID user yang sedang login
+        $pemasukan = Pemasukan::where('id', $id)->where('id_user', auth()->id())->firstOrFail();
+
+        // Validasi request
+        $request->validate([
+            'nama' => 'required|string',
+            'jumlah_pemasukan' => 'required|numeric'
+        ]);
+
+        // Perbarui data pemasukan
+        $pemasukan->nama = $request->nama;
+        $pemasukan->jumlah_pemasukan = $request->jumlah_pemasukan;
         $pemasukan->save();
-    
-        return redirect('/pemasukan')->with('success', 'Pemasukan berhasil diperbarui');
+
+        // Kirim respons berhasil
+        return response()->json(['pemasukan' => $pemasukan], 200);
     }
-    
-     
+
     public function store(Request $request)
     {
+        // Validasi request
+        $request->validate([
+            'nama' => 'required|string',
+            'jumlah_pemasukan' => 'required|numeric'
+        ]);
+
+        // Simpan data pemasukan baru
         $pemasukan = new Pemasukan();
         $pemasukan->nama = $request->nama;
-        $pemasukan->jumlah_pemasukan = $request->input('jumlah_pemasukan');
-        // $pemasukan->tanggal = $request->input('tanggal');
+        $pemasukan->jumlah_pemasukan = $request->jumlah_pemasukan;
+        $pemasukan->id_user = auth()->id(); // Sesuaikan dengan kebutuhan autentikasi
         $pemasukan->save();
-        return redirect('/pemasukan');
+
+        // Kirim respons berhasil beserta data pemasukan yang disimpan dalam format JSON
+        return response()->json(['message' => 'Pemasukan berhasil disimpan', 'pemasukan' => $pemasukan], 201);
     }
-
-    /**
-     * Display the specified resource.
-     */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    
-
-    /**
-     * Update the specified resource in storage.
-     */
-   
-
-    /**
-     * Remove the specified resource from storage.
-     */
-  
 }

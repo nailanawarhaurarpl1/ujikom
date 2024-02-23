@@ -49,7 +49,12 @@
             </tbody>
             
               <tfoot>
-                <tr></tr>
+                <tr>
+                  
+                  <td colspan="3"><b>Total Pengeluaran</b></td>
+                  
+                  <td colspan="2"><b>{{ $totalPengeluaran }}</b></td>
+                </tr>
               </tfoot>
             </table>
           </div>
