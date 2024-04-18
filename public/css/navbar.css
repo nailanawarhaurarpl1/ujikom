@@ -1,0 +1,30 @@
+.navbar {
+    background-color: #ffffff; /* Putih */
+    color: #000000; /* Hitam */
+}
+
+.navbar .nav-link {
+    color: #000000; /* Hitam */
+}
+
+.navbar .navbar-toggler-icon {
+    color: #000000; /* Hitam */
+}
+
+/* Warna teks dan ikon notifikasi */
+.navbar .count-indicator .mdi {
+    color: #000000; /* Hitam */
+}
+
+.navbar-nav .nav-link p {
+    color: #000000; /* Warna teks pada tag <p> di dalam .nav-link */
+}
+
+.navbar-dropdown {
+    background-color: #ffffff; /* Warna latar belakang dropdown */
+}
+
+.dropdown-item {
+    color: #000000; /* Warna teks pada dropdown item */
+}
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengeluaran;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PengeluaranController extends Controller
 {
@@ -18,78 +19,97 @@ class PengeluaranController extends Controller
     }
     
     public function destroy($id)
-{
-    try {
-        $pengeluaran = Pengeluaran::findOrFail($id);
-        $pengeluaran->delete();
-
-        return response()->json([
-            'message' => 'Pengeluaran berhasil dihapus',
-        ], 200);
-    } catch (\Exception $e) {
-        return response()->json([
-            'message' => 'Gagal menghapus pengeluaran',
-            'error' => $e->getMessage(),
-        ], 500);
-    }
-}
-
-
-
-    public function edit($id)
     {
         $pengeluaran = Pengeluaran::find($id);
-        $kategori = Kategori::all();
-        return view('member.editpengeluaran', compact('pengeluaran','kategori'));
+        $pengeluaran->delete();
+        Session::flash('success', 'Berhasil hapus data');
+        return redirect('/member/pengeluaran');
+        
     }
+
+
+
+public function edit($id)
+{
+    $pengeluaran = Pengeluaran::find($id);
+    $kategori = Kategori::all();
+    return view('member.pengeluaran.editpengeluaran', compact('pengeluaran', 'kategori'));
+}
 
     public function index()
     {
         $pengeluaran = Pengeluaran::all();
-    
-        // Menghitung total jumlah pemasukan
         $totalPengeluaran = Pengeluaran::sum('jumlah_pengeluaran');
+        $kategori = Kategori::all(); // Ambil semua data kategori
     
-        // Pass data pemasukan dan total jumlah pemasukan ke view
-        return view('member.pengeluaran', compact('pengeluaran', 'totalPengeluaran'));
+        return view('member.pengeluaran.pengeluaran', compact('pengeluaran', 'totalPengeluaran', 'kategori'));
+
+
+        // $pengeluaran = Pengeluaran::all();
+    
+        // // Menghitung total jumlah pemasukan
+        // $totalPengeluaran = Pengeluaran::sum('jumlah_pengeluaran');
+    
+        // // Pass data pemasukan dan total jumlah pemasukan ke view
+        // return view('member.pengeluaran', compact('pengeluaran', 'totalPengeluaran'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $kategori = Kategori::all();
-        return view('member.tambahpengeluaran', compact('kategori'));
-    }
+{
+    $kategori = Kategori::all();
+    return view('member.pengeluaran.tambahpengeluaran', compact('kategori'));
+}
 
     /**
      * Store a newly created resource in storage.
      */
     public function update(Request $request, $id)
 {
-    // Validasi input
-    $validatedData = $request->validate([
-        'keterangan' => 'required|string',
-        'id_kategori' => 'required|exists:kategoris,id',
-        'jumlah_pengeluaran' => 'required|integer',
-    ]);
+
+    $pengeluaran = Pengeluaran::where('id', $id)->first();
+        // Validasi request
+        if (!$pengeluaran) {
+            return response()->json(['message' => 'Pengeluaran tidak ditemukan'], 404);
+        }
+        $request->validate([
+            'keterangan' => 'required|string',
+            'jumlah_pengeluaran' => 'required|numeric'
+        ]);
+        
+
+        // Perbarui data pemasukan
+        $pengeluaran->keterangan = $request->keterangan;
+        $pengeluaran->jumlah_pengeluaran = $request->jumlah_pengeluaran;
+        $pengeluaran->save();
+
+        Session::flash('success', 'Berhasil edit data');
+        // Kirim respons berhasil
+        return redirect('/member/pengeluaran');
+
+
+
+   
 
     // Cari pengeluaran berdasarkan ID
-    $pengeluaran = Pengeluaran::findOrFail($id);
+    // $pengeluaran = Pengeluaran::findOrFail($id);
 
     // Perbarui atribut pengeluaran dengan data baru
-    $pengeluaran->keterangan = $validatedData['keterangan'];
-    $pengeluaran->id_kategori = $validatedData['id_kategori'];
-    $pengeluaran->jumlah_pengeluaran = $validatedData['jumlah_pengeluaran'];
-    // $pemasukan->tanggal = $request->input('tanggal');
-    $pengeluaran->save();
+    // $pengeluaran->keterangan = $validatedData['keterangan'];
+    // $pengeluaran->id_kategori = $validatedData['id_kategori'];
+    // $pengeluaran->jumlah_pengeluaran = $validatedData['jumlah_pengeluaran'];
+    // // $pemasukan->tanggal = $request->input('tanggal');
+    // $pengeluaran->save();
 
     // Berikan respons JSON
-    return response()->json([
-        'message' => 'Pengeluaran berhasil diperbarui',
-        'data' => $pengeluaran
-    ], 200);
+    // return response()->json([
+    //     'message' => 'Pengeluaran berhasil diperbarui',
+    //     'data' => $pengeluaran
+    // ], 200);
+
+    return redirect('/member/pengeluaran');
 }
 
     
@@ -99,36 +119,20 @@ class PengeluaranController extends Controller
     // Validasi input
     $validatedData = $request->validate([
         'keterangan' => 'required|string',
-        'id_kategori' => 'required|exists:kategoris,id',
+        // 'id_kategori' => 'required|exists:kategoris,id',
         'jumlah_pengeluaran' => 'required|integer',
     ]);
 
     // Buat instance Pengeluaran
     $pengeluaran = new Pengeluaran();
     $pengeluaran->keterangan = $validatedData['keterangan'];
-    $pengeluaran->id_kategori = $validatedData['id_kategori'];
+    // $pengeluaran->id_kategori = $validatedData['id_kategori'];
     $pengeluaran->jumlah_pengeluaran = $validatedData['jumlah_pengeluaran'];
     $pengeluaran->id_user = auth()->id();
-    // $pemasukan->tanggal = $request->input('tanggal');
+    // $pengeluaran->tanggal = $request->input('tanggal');
     $pengeluaran->save();
-
-
-
-    $formattedPengeluaran = [
-        'id' => $pengeluaran->id,
-        'keterangan' => $pengeluaran->keterangan,
-        'jumlah_penge$pengeluaran' => $pengeluaran->jumlah_pengeluaran,
-        'id_kategori' => $pengeluaran->id_kategori,
-        'created_at' => $pengeluaran->created_at,
-        'updated_at' => $pengeluaran->updated_at,
-        'id_user' => $pengeluaran->id_user
-    ];
-
-    
-    return response()->json([
-        'message' => 'Pengeluaran berhasil disimpan',
-        'data' => $formattedPengeluaran
-    ], 201);
+    Session::flash('success', 'Berhasil tambah data');
+    return redirect('/member/pengeluaran');
 
 
 

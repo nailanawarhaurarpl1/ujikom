@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Expense Ease | Halaman Utama</title>
+  <title>Bangdul | Halaman Utama</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,14 +43,14 @@
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="fixed-top d-flex align-items-center ">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">expenseease@gmail.com</a>
-        <i class="bi bi-phone-fill phone-icon"></i> +62 813 9548 1954
+      <div class="contact-info d-flex align-items-center" style="margin-left: 50px">
+        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">bangdul@gmail.com</a>
+        <i class="bi bi-phone-fill phone-icon"></i> @bangdul
       </div>
       
     </div>
     <div class="cta d-none d-md-block " >
-      <a href="/register-member" class="scrollto" >Mulai Sekarang</a>
+      <a href="/register-member" class="scrollto" style="margin-right: 50px">Mulai Sekarang</a>
     </div>  
     
   </div>
@@ -58,9 +58,10 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center ">
     <div class="container d-flex align-items-center justify-content-between">
-      <img src="{{ asset('image/logoExpenseEasee.png') }}" alt="Deskripsi Gambar" width="200px" height="200px">
+     
+      <img src="{{ asset('image/bangdul.png')}}" alt="Deskripsi Gambar" width="60px" height="60px"><h1 style="font-size: 25px; color: white; margin-right: 650px; margin-bottom: 5px">Bangdul </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href=index.html" class="logo"><img src="{{asset('guest/assets/img/logo.png')}}" alt="" class="img-fluid"></a>-->
+      <!-- <a href=index.html" class="logo"><img src="{{ asset('image/bangdul.png')}}" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -91,7 +92,7 @@
       <div class="carousel-item">
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown">Berhenti Mencatat Menggunakan Kertas</h2>
-          <p class="animate__animated animate__fadeInUp">Aplikasi Expense Ease ini memastikan segala sesuatu tetap teratur karena memiliki fitur pengingat supaya Anda tidak melewati tenggat/acara penting. Ucapkan selamat tinggal pada bon kertas!
+          <p class="animate__animated animate__fadeInUp">Aplikasi Bangdul ini memastikan segala sesuatu tetap teratur karena memiliki fitur pengingat supaya Anda tidak melewati tenggat/acara penting. Ucapkan selamat tinggal pada bon kertas!
 
           </p>
           <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Baca Selengkapnya</a>
@@ -127,17 +128,9 @@
         <div class="row">
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
             <div class="icon-box">
-              <div class="icon"><i class="bi bi-bar-chart-line"></i></div>
+              <div class="icon"><i class="bi bi-bar-chart"></i></div>
               <h4 class="title"><a href="">Statistika</a></h4>
               <p class="description">Lihat perkembangan data pemasukan dan pengeluaran Anda dengan statistika.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-card-list"></i></div>
-              <h4 class="title"><a href="">Kategori</a></h4>
-              <p class="description">Buat kategori sesuka Anda untuk mengkategorikan pengeluaran Anda.</p>
             </div>
           </div>
 
@@ -157,6 +150,14 @@
             </div>
           </div>
 
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-file-earmark-text"></i></div>
+              <h4 class="title"><a href="">Laporan</a></h4>
+              <p class="description">Lihat pemasukan sekaligus pengeluaran dalam satu laporan.</p>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -168,7 +169,7 @@
 
         <div class="section-title">
           <h2>Tentang Kami</h2>
-          <p>Aplikasi Expense Ease untuk mengelola keuangan pribadi, mencatat transaksi dari kegiatan keluar masuk. Web ini sangat membantu bagi semua orang dalam mencatat keuangan mereka, tanpa kertas tinggal ketik dan bisa diakses dimana saja selama memiliki internet.</p>
+          <p>Aplikasi Bangdul untuk mengelola keuangan pribadi, mencatat transaksi dari kegiatan keluar masuk. Web ini sangat membantu bagi semua orang dalam mencatat keuangan mereka, tanpa kertas tinggal ketik dan bisa diakses dimana saja selama memiliki internet.</p>
         </div>
 
         <div class="row content">
@@ -184,7 +185,7 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Penasaran bagaimana cara kerja aplikasi ini? Ayo login sekarang dan coba fitur - fitur yang sudah disediakan pada aplikasi Expense Ease ini !!
+              Penasaran bagaimana cara kerja aplikasi ini? Ayo login sekarang dan coba fitur - fitur yang sudah disediakan pada aplikasi Bangdul ini !!
             </p>
             <a href="/register-member" class="btn-learn-more">Coba Sekarang</a>
           </div>

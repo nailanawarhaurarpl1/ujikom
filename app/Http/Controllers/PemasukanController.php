@@ -3,54 +3,66 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pengeluaran;
 use App\Models\Pemasukan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PemasukanController extends Controller
 {
-    public function getAllPemasukan()
-    {
-        $pemasukan = Pemasukan::where('id_user', auth()->id())->get();
-        return response()->json(['data' => $pemasukan], 200);
-    }
 
-    public function destroy($id)
+    public function index()
+{
+    $pemasukan = Pemasukan::all();
+    $totalPemasukan = $pemasukan->sum('jumlah_pemasukan');
+    $pengeluaran = Pengeluaran::all(); // Mengambil semua data pengeluaran
+
+    return view('member.pemasukan.pemasukan', compact('pemasukan', 'totalPemasukan', 'pengeluaran')); // Mengirimkan data pemasukan dan pengeluaran ke view
+}
+
+
+    public function edit($id)
     {
-        try {
-            $pemasukan = Pemasukan::where('id', $id)->where('id_user', auth()->id())->firstOrFail();
-            $pemasukan->delete();
-            return response()->json(['message' => 'Pemasukan berhasil dihapus'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Gagal menghapus pemasukan'], 500);
-        }
+        $pemasukan = Pemasukan::find($id);
+        return view('member.pemasukan.editpemasukan', compact('pemasukan'));
     }
 
     public function update(Request $request, $id)
     {
-        // Temukan pemasukan berdasarkan ID dan ID user yang sedang login
-        $pemasukan = Pemasukan::where('id', $id)->where('id_user', auth()->id())->firstOrFail();
+        
 
+
+
+        // Temukan pemasukan berdasarkan ID dan ID user yang sedang login
+        $pemasukan = Pemasukan::where('id', $id)->first();
         // Validasi request
+        if (!$pemasukan) {
+            return response()->json(['message' => 'Pemasukan tidak ditemukan'], 404);
+        }
         $request->validate([
             'nama' => 'required|string',
             'jumlah_pemasukan' => 'required|numeric'
         ]);
+        
 
         // Perbarui data pemasukan
         $pemasukan->nama = $request->nama;
         $pemasukan->jumlah_pemasukan = $request->jumlah_pemasukan;
         $pemasukan->save();
 
+        Session::flash('success', 'Berhasil edit data');
         // Kirim respons berhasil
-        return response()->json(['pemasukan' => $pemasukan], 200);
+        return redirect('/member/pemasukan');
     }
 
     public function store(Request $request)
     {
+
+        
         // Validasi request
         $request->validate([
             'nama' => 'required|string',
-            'jumlah_pemasukan' => 'required|numeric'
+            'jumlah_pemasukan' => 'required|numeric' 
         ]);
 
         // Simpan data pemasukan baru
@@ -61,6 +73,16 @@ class PemasukanController extends Controller
         $pemasukan->save();
 
         // Kirim respons berhasil beserta data pemasukan yang disimpan dalam format JSON
-        return response()->json(['message' => 'Pemasukan berhasil disimpan', 'pemasukan' => $pemasukan], 201);
+        // return response()->json(['message' => 'Pemasukan berhasil disimpan', 'pemasukan' => $pemasukan], 201);
+        Session::flash('success', 'Berhasil tambah data');
+        return redirect('/member/pemasukan');
+    }
+
+    public function destroy($id)
+    {
+        $pemasukan = Pemasukan::find($id);
+        $pemasukan->delete();
+        Session::flash('success', 'Berhasil hapus data');
+        return redirect('/member/pemasukan');
     }
 }

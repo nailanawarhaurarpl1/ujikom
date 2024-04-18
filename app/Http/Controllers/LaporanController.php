@@ -2,25 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\laporan;
 use App\Models\Pemasukan;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class LaporanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    
     public function index()
     {
+        // Ambil semua data pemasukan dan pengeluaran dari database
         $pemasukan = Pemasukan::all();
         $pengeluaran = Pengeluaran::all();
-
-        // Pass data pemasukan dan pengeluaran ke view
-        return view('member.laporan', compact('pemasukan', 'pengeluaran'));
+        
+        // Gabungkan data pemasukan dan pengeluaran ke dalam satu array
+        $allData = $pemasukan->merge($pengeluaran);
+        
+        // Sorting data berdasarkan tanggal secara ascending (dari yang paling lama)
+        $sortedData = $allData->sortBy('created_at', SORT_REGULAR, false);
+        
+        // Kelompokkan data berdasarkan tanggal
+        $groupedData = [];
+        foreach ($sortedData as $item) {
+            $tanggal = $item->created_at->format('Y-m-d');
+            $groupedData[$tanggal][] = ['type' => $item instanceof Pemasukan ? 'Pemasukan' : 'Pengeluaran', 'data' => $item];
+        }
+        
+        return view('member.laporan', compact('groupedData'));
     }
 
     /**
@@ -32,62 +42,28 @@ class LaporanController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
+        // Konversi format tanggal jika diperlukan
+        $startDate = date('Y-m-d', strtotime($startDate));
+        $endDate = date('Y-m-d', strtotime($endDate));
+
         // Ambil data pemasukan dan pengeluaran yang sesuai dengan rentang tanggal
-        $pemasukan = Pemasukan::whereBetween('created_at', [$startDate, $endDate])->get();
-        $pengeluaran = Pengeluaran::whereBetween('created_at', [$startDate, $endDate])->get();
+        $pemasukan = Pemasukan::whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])->get();
+        $pengeluaran = Pengeluaran::whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])->get();
 
-        // Kembalikan data dalam bentuk JSON
-        return response()->json([
-            'pemasukan' => $pemasukan,
-            'pengeluaran' => $pengeluaran,
-        ]);
-    }
+        // Gabungkan data pemasukan dan pengeluaran ke dalam satu array
+        $allData = $pemasukan->merge($pengeluaran);
+        
+        // Sorting data berdasarkan tanggal secara ascending (dari yang paling lama)
+        $sortedData = $allData->sortBy('created_at', SORT_REGULAR, false);
+        
+        // Kelompokkan data berdasarkan tanggal
+        $groupedData = [];
+        foreach ($sortedData as $item) {
+            $tanggal = $item->created_at->format('Y-m-d');
+            $groupedData[$tanggal][] = ['type' => $item instanceof Pemasukan ? 'Pemasukan' : 'Pengeluaran', 'data' => $item];
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(laporan $laporan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(laporan $laporan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, laporan $laporan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(laporan $laporan)
-    {
-        //
+        // Pass data pemasukan dan pengeluaran ke view
+        return view('member.laporan', compact('groupedData'));
     }
 }

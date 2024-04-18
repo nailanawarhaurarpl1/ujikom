@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h2>Edit Kategori</h2>
-        <form action="/kategori/{{ $kategori->id }}" method="POST">
+        <form action="/member/kategori/{{ $kategori->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -15,4 +15,6 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+
 @endsection

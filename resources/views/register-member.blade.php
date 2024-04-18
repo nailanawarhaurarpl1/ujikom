@@ -22,7 +22,7 @@
 
             <div class="signin-form">
                 <h2 class="form-title" >Daftar / <a style="text-decoration: none; color: #8B7E74;" href="/login-member">Masuk</a></h2>
-                <h3 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-top: -30px; color: #747264;">Daftar untuk gunakan aplikasi ExpenseEase</h3><br>
+                <h3 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-top: -30px; color: #747264;">Daftar untuk gunakan aplikasi Bangdul</h3><br>
                 <form method="post" class="register-form" action="/register-member">
                     @csrf
                     <div class="form-group">

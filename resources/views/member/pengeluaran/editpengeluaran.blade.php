@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h2>Edit Pengeluaran</h2>
-        <form action="/pengeluaran/{{ $pengeluaran->id }}" method="POST">
+        <form action="/member/pengeluaran/{{ $pengeluaran->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -27,4 +27,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    
 @endsection

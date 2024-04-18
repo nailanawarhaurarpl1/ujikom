@@ -1,7 +1,17 @@
-@extends('layouts.admin')
+@extends('layouts.member')
 
 @section('content')
 
+<style>
+  #barChart {
+    background-color: #fff; /* Ubah warna background chart menjadi putih */
+}
+.card {
+            background-color: #fff; /* Ubah warna background card menjadi putih */
+            border: none; /* Hilangkan border card */
+            margin-bottom: -15px
+        }
+</style>
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
       <div class="card corona-gradient-card">
@@ -13,11 +23,11 @@
             <div class="col-5 col-sm-7 col-xl-8 p-0">
               
               <h4 class="mb-1 mb-sm-0">Selamat Datang </h4>
-              <p class="mb-0 font-weight-normal d-none d-sm-block">Di Halaman Admin</p>
+              <p class="mb-0 font-weight-normal d-none d-sm-block">Di Aplikasi Bangdul</p>
             </div>
             <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
               <span>
-                <a href="#" target="_blank" class="btn btn-outline-light btn-rounded get-started-btn">Gatau diisi apa</a>
+                <a href="#" target="_blank" class="btn btn-outline-light btn-rounded get-started-btn">Bangdul</a>
               </span>
             </div>
           </div>
@@ -27,50 +37,34 @@
   </div>
   
     
-    <div class="col-xl-12 col-sm-6 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-            
-          <div class="row">
-            <div class="col-4 col-sm-3 col-xl-2">
-                <img src="{{ asset('image/user.png')}}" class="gradient-corona-img img-fluid" alt="" style="margin-left: 20px; width: 100px;">
-              </div>
-            <div class="col-5 col-sm-7 col-xl-8 p-0">
-              <div class="d-flex align-items-center align-self-start" style="margin-left: 40px">
-                <h2 class="mb-0" style="font-size: 22px">Total Keseluruhan Member</h2><br><br>
-                
-              </div>
-              <h6 class="text-muted font-weight-normal" style="margin-left: 40px; font-size: 25px"><b>10</b></h6>
-            </div>
-            <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center"><br>
-                <div class="icon icon-box-success " style="margin-left: 90px; width: 55px; height: 55px;">
-               
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><path fill="currentColor" d="M7 15h2c0 1.08 1.37 2 3 2s3-.92 3-2c0-1.1-1.04-1.5-3.24-2.03C9.64 12.44 7 11.78 7 9c0-1.79 1.47-3.31 3.5-3.82V3h3v2.18C15.53 5.69 17 7.21 17 9h-2c0-1.08-1.37-2-3-2s-3 .92-3 2c0 1.1 1.04 1.5 3.24 2.03C14.36 11.56 17 12.22 17 15c0 1.79-1.47 3.31-3.5 3.82V21h-3v-2.18C8.47 18.31 7 16.79 7 15"/></svg>
-                  </div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
+    
 
     <div class="row">
       <div class="col-md-12 grid-margin stretch-card">
           <div class="card">
               <div class="card-body">
                   <div class="col-lg-12 grid-margin stretch-card">
-                      <div class="card">
-                          <div class="card-body">
-                              <h4 class="card-title">Bar chart</h4>
-                              <canvas id="barChart" style="height:230px"></canvas>
-                          </div>
+                    <div class="card">
+                      <div class="card-body">
+                        <canvas id="barChart" style="height:230px"></canvas>
                       </div>
+                    </div>
                   </div>
               </div>
           </div>
       </div>
   </div>
-  
+
+{{-- <script src="{{ asset('member/assets/vendors/js/vendor.bundle.base.js') }}"></script> --}}
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    {{-- <script src="{{ asset('member/assets/vendors/chart.js/Chart.min.js') }}"></script> --}}
+    <!-- End plugin js for this page -->
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    {{-- <script src="{{ asset('member/assets/js/chart.js') }}"></script> --}}
+    <!-- End custom js for this page -->
+
   @endsection
   
   

@@ -1,10 +1,3 @@
-{{-- <form action="/login-member" method="post">
-    @csrf
-    <input type="email" name="email" placeholder="masukkan email">
-    <input type="password" name="password" placeholder="masukkan password">
-    <button>login</button>
-</form> --}}
-
 @extends('layouts.form')
 
 @section('content')
@@ -13,17 +6,22 @@
         <div class="signup-content">
             <div class="signup-form">
                 <h2 class="form-title">Masuk</h2>
-                <h3 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-top: -30px; color: #747264;">Masuk untuk gunakan aplikasi ExpenseEase</h3><br>
-                <form method="post" class="register-form" action="/login-member">
+                <h3 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-top: -30px; color: #747264;">Masuk untuk gunakan aplikasi Bangdul</h3><br>
+                <form method="POST" class="register-form" action="{{ route('login') }}">
                     @csrf
-
                     <div class="form-group">
-                        @if(session('error'))
-                            <div class="alert alert-danger" role="alert" style="color: red">
+                        @if (session('error'))
+                            <div id="error-message" class="alert alert-danger" role="alert" style="color: red">
                                 {{ session('error') }}
                             </div>
+                            <script>
+                                setTimeout(function(){
+                                    document.getElementById('error-message').style.display = 'none';
+                                }, 3000); // 3000 milliseconds = 3 seconds
+                            </script>
                         @endif
                     </div>
+                    
 
                     <div class="form-group">
                         <label for="email"><i class="zmdi zmdi-email"></i></label>
@@ -36,7 +34,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="form-submit" style="border: none">Masuk</button>
+                        <button type="submit" class="form-submit" style="border: none">Masuk</button>
                     </div>
                 </form>
             </div>
@@ -47,5 +45,6 @@
             </div>
         </div>
     </div>
+    
 @endsection
 

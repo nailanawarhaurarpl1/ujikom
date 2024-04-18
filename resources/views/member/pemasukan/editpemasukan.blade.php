@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h2>Edit Pemasukan</h2>
-        <form action="/pemasukan/{{ $pemasukan->id }}" method="POST">
+        <form action="/member/pemasukan/{{ $pemasukan->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -19,4 +19,6 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+ 
+
 @endsection

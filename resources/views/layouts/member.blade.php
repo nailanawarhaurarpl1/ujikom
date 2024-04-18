@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>bangdul</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('member/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{ asset('member/assets/vendors/css/vendor.bundle.base.css')}}">
@@ -22,7 +22,9 @@
     <!-- End layout styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
-    <link rel="shortcut icon" href="{{ asset('member/assets/images/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{ asset('member/assets/images/bangdul.png')}}" />
+    
+
   </head>
   <body>
     <div class="container-scroller">
@@ -36,7 +38,7 @@
         @include('partials.navbar')
         <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper">
+          <div class="content-wrapper" style="background-color: white">
             @yield('content')
           </div>
           <!-- content-wrapper ends -->
