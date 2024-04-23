@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pemasukan;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
@@ -13,9 +14,13 @@ class LaporanController extends Controller
      */
     public function index()
     {
+        
+    
+
+    
         // Ambil semua data pemasukan dan pengeluaran dari database
-        $pemasukan = Pemasukan::all();
-        $pengeluaran = Pengeluaran::all();
+        $pemasukan = Pemasukan::where('id_user', Auth::user()->id)->get();
+        $pengeluaran = Pengeluaran::where('id_user', Auth::user()->id)->get();
         
         // Gabungkan data pemasukan dan pengeluaran ke dalam satu array
         $allData = $pemasukan->merge($pengeluaran);

@@ -13,7 +13,7 @@ class PemasukanController extends Controller
 
     public function index()
 {
-    $pemasukan = Pemasukan::all();
+    $pemasukan = Pemasukan::where('id_user', Auth::user()->id)->get();
     $totalPemasukan = $pemasukan->sum('jumlah_pemasukan');
     $pengeluaran = Pengeluaran::all(); // Mengambil semua data pengeluaran
 
@@ -29,10 +29,6 @@ class PemasukanController extends Controller
 
     public function update(Request $request, $id)
     {
-        
-
-
-
         // Temukan pemasukan berdasarkan ID dan ID user yang sedang login
         $pemasukan = Pemasukan::where('id', $id)->first();
         // Validasi request

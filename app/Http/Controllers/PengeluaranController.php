@@ -6,6 +6,7 @@ use App\Models\Pengeluaran;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class PengeluaranController extends Controller
 {
@@ -38,11 +39,12 @@ public function edit($id)
 
     public function index()
     {
-        $pengeluaran = Pengeluaran::all();
-        $totalPengeluaran = Pengeluaran::sum('jumlah_pengeluaran');
-        $kategori = Kategori::all(); // Ambil semua data kategori
+
+        $pengeluaran = Pengeluaran::where('id_user', Auth::user()->id)->get();
+    $totalPengeluaran = $pengeluaran->sum('jumlah_pengeluaran');
     
-        return view('member.pengeluaran.pengeluaran', compact('pengeluaran', 'totalPengeluaran', 'kategori'));
+
+    return view('member.pengeluaran.pengeluaran', compact('pengeluaran', 'totalPengeluaran'));
 
 
         // $pengeluaran = Pengeluaran::all();

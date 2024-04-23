@@ -1,6 +1,6 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset('member/assets/images/logo-mini.svg')}}" alt="logo" /></a>
+      <a class="navbar-brand brand-logo-mini" href="index.html"><img src="https://i.pinimg.com/564x/12/36/69/123669222f8b7a6d9a122a73bf832932.jpg" alt="logo" /></a>
     </div>
     <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -12,8 +12,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
             <div class="navbar-profile">
-              <img class="img-xs rounded-circle" src="{{ asset('member/assets/images/faces/face15.jpg')}}" alt="">
-              <p class="mb-0 d-none d-sm-block navbar-profile-name">Admin</p>
+              <img class="img-xs rounded-circle" src="https://i.pinimg.com/564x/12/36/69/123669222f8b7a6d9a122a73bf832932.jpg">&nbsp;&nbsp; Admin</p>
               <i class="mdi mdi-menu-down d-none d-sm-block"></i>
             </div>
           </a>

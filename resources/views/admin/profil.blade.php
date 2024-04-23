@@ -19,7 +19,7 @@
         }
 
         body {
-            background-color: #e8f5ff;
+            background-color: #282A3A;
             font-family: Arial;
             overflow: hidden;
         }
@@ -87,6 +87,7 @@
         .profile {
             margin-bottom: 20px;
             margin-top: -12px;
+            margin-right: 70px;
             text-align: center;
             position: relative; /* Tambahkan properti position */
         }
@@ -95,6 +96,9 @@
             border-radius: 50%;
             box-shadow: 0px 0px 5px 1px grey;
             cursor: pointer; /* Menambahkan pointer cursor */
+            width: 100px; /* Menyesuaikan ukuran gambar */
+            height: 100px; /* Menyesuaikan ukuran gambar */
+            object-fit: cover; /* Menyamakan aspek ratio gambar */
         }
 
         .name {
@@ -157,7 +161,7 @@
             background-color: #fff;
             border-radius: 18px;
             box-shadow: 1px 1px 8px 0 grey;
-            height: 300px;
+            height: auto;
             margin-bottom: 20px;
             padding: 20px 0 20px 50px;
             margin-right: 100px;
@@ -216,39 +220,6 @@
         .fa-snapchat:hover {
             color: #fffb01 !important;
         }
-
-        /* Profile Picture */
-        .profile {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            position: relative;
-            background-color: #ccc;
-            right: 30px
-        }
-
-        .profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .upload-icon {
-            position: absolute;
-            bottom: 0; /* Menyesuaikan posisi */
-            right: 0; /* Menyesuaikan posisi */
-            transform: translate(-50%, -50%); /* Menyesuaikan posisi */
-            cursor: pointer;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 5px;
-            border-radius: 50%;
-        }
-
-        .upload-icon i {
-            color: #333;
-            font-size: 10px;
-        }
         /* End */
     </style>
 </head>
@@ -258,54 +229,45 @@
     <!-- Main -->
     <div class="main">
         <br>
-        <div class="card">
+        <div class="card" >
             <div class="card-body">
                 
-                <table style="margin-left: 4px; width: 480px; height: 165px" border="0">
-                    <i class="fa fa-pen fa-xs edit" style="margin-right: 230px"></i>
+                <table style="margin-left: 55px; width: 430px;" border="0">
+                    
                     <center>
                         <br>
                         <div class="profile">
-                            <img id="preview-image" src="#" alt="">
-                            <input class="iconya" type="file" id="upload-image" accept="image/*" onchange="previewImage(event)">
-                            
+                            <img id="preview-image" src="https://i.pinimg.com/564x/12/36/69/123669222f8b7a6d9a122a73bf832932.jpg" alt="">
                         </div>
                         
                     </center>
-                    <tbody style="font-size: 20px">
+                    <tbody style="font-size: 25px">
                         <tr>
-                            <td style="width: 155px">Nama Pengguna</td>
-                            <td style="width: 15px">:</td>
-                            <td colspan="2">{{ Auth::user()->name }}</td>
-                            <td></td>
-                            
+                            <td>Role</td>
+                            <td>:</td>
+                            <td>Admin</td>
                         </tr>
                         <tr>
                             <td>Email</td>
                             <td>:</td>
-                            <td colspan="2">{{ Auth::user()->email }}</td>
-                            <td></td>
-                            
+                            <td>admin@gmail.com</td>
                         </tr>
-                        {{-- <tr>
+                        <tr>
                             <td>Password</td>
                             <td>:</td>
-                            <td colspan="2">zia</td>
-                            <td></td>
-                            
-                        </tr> --}}
+                            <td>123</td>
+                        </tr>
                         
-                    </tbody>                   
+                    </tbody>
                     <tfoot>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="width: 100px"></td>
-                            <td align="right" style="width: 20px"><a href="/member/dashboard">
-                                <i class="fa fa-arrow-circle-right" style="font-size: 25px; margin-right: 10px;"></i>
-
+                            <td style="width: 90px" align="right"><a href="/admin/dashboard">
+                                <i class="fa fa-arrow-circle-right" style="font-size: 25px; margin-right: 10px"></i>
                             </a></td>
+                            
                         </tr>
                     </tfoot>
                 </table>
@@ -313,33 +275,6 @@
         </div>
     </div>
     <!-- End -->
-    <script>
-        // Fungsi untuk menampilkan gambar yang dipilih sebelum diunggah
-        function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function(){
-                var output = document.getElementById('preview-image');
-                output.src = reader.result;
-    
-                // Simpan URL gambar ke dalam Local Storage
-                localStorage.setItem('profileImage', reader.result);
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        };
-    
-        // Tambahkan event listener ke gambar profil untuk memicu klik pada input file saat gambar profil diklik
-        document.querySelector('.profile img').addEventListener('click', function() {
-            document.getElementById('upload-image').click();
-        });
-    
-        // Periksa apakah ada URL gambar yang disimpan di Local Storage saat halaman dimuat kembali
-        window.onload = function() {
-            var profileImage = localStorage.getItem('profileImage');
-            if (profileImage) {
-                document.getElementById('preview-image').src = profileImage;
-            }
-        };
-    </script>
     
     
 </body>

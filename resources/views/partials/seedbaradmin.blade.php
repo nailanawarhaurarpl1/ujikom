@@ -7,7 +7,7 @@
       
      
       <li class="nav-item menu-items">
-        <a class="nav-link" href="/member/dashboard">
+        <a class="nav-link" href="/admin/dashboard">
           <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
           </span>
@@ -15,11 +15,19 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="/laporan">
+        <a class="nav-link" href="/admin/member">
+          <span class="menu-icon">
+            <i class="bi bi-people-fill"></i>
+          </span>
+          <span class="menu-title">Member</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/profil">
           <span class="menu-icon">
             <i class="mdi mdi-contacts"></i>
           </span>
-          <span class="menu-title">Laporan</span>
+          <span class="menu-title">Profil</span>
         </a>
       </li>
     </ul>

@@ -51,7 +51,7 @@
                         <td><br> Jumlah <br><br></td>
                         <td>: <br></td>
                         <td style="width: 50px;" colspan="3">
-                            <input type="text" class="form-control text-black" id="tambah_jumlah" name="jumlah_pemasukan" style="background-color: white; width: 100%;" required placeholder="masukkan jumlah uang">
+                            <input type="number" class="form-control text-black" id="tambah_jumlah" name="jumlah_pemasukan" style="background-color: white; width: 100%;" required placeholder="masukkan jumlah uang">
                         </td>                          
                     </tr>
                       <tr>

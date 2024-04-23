@@ -1,13 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PengingatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +42,14 @@ Route::post('register-member', [LoginController::class, 'register']);
 
 
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-});
+// Route::get('/admin/dashboard', function () {
+//     return view('admin.dashboard');
+// });
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
+    Route::get('/admin/dashboard', [MemberController::class, 'dashboard']);
+    Route::get('/admin/member', [MemberController::class, 'showMembers']);
+    Route::get('/admin/profil', function () {
+        return view('admin.profil');
     });
 });
 
@@ -108,9 +112,12 @@ Route::middleware(['auth', 'member'])->group(function () {
 
 
     //pengingat
-    Route::get('/member/pengingat', function () {
-        return view('member.pengingat');
-    });
+    Route::get('/member/pengingat', [PengingatController::class, 'index']);
+    Route::post('/member/pengingat/post', [PengingatController::class, 'store']);
+    Route::put('/member/pengingat/{id}', [PengingatController::class, 'update'])->name('pengingat.update');
+    Route::delete('/member/hapus-pengingat/{id}', [PengingatController::class, 'destroy']);
+
+
 
 
 
@@ -118,6 +125,7 @@ Route::middleware(['auth', 'member'])->group(function () {
     Route::get('/profil', function () {
         return view('member.profil');
     });
+    
 });
 
 
