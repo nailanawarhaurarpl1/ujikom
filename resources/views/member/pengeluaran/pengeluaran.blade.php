@@ -229,7 +229,7 @@
               <tfoot>
                 <tr>
                   <td></td>
-                  <td colspan="3"><p style="color: black; font-size: "><b>Total Pengeluaran</b></p></td>
+                  <td colspan="2"><p style="color: black; font-size: "><b>Total Pengeluaran</b></p></td>
                   
                   <td colspan="2"><p style="color: black; font-size: "><b>{{ $totalPengeluaran }}</b></p></td>
                 </tr>

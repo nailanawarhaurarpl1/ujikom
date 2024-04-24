@@ -59,7 +59,6 @@
               <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                       <div class="card-body">
-                          
                           <canvas id="myChart" style="height:230px"></canvas>
                       </div>
                   </div>

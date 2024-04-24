@@ -19,16 +19,14 @@ class PengingatController extends Controller
 
     public function index()
     {
-        // Ambil data pengingat
-        
+        // Ambil data pengingat hanya untuk pengguna yang sedang login
+        $pengingat = Pengingat::where('id_user', auth()->id())->get();
     
-
-    
-        $pengingat = Pengingat::where('id_user', Auth::user()->id)->get();
-
         // Kirim data pengingat ke view
         return view('member.pengingat', compact('pengingat'));
     }
+    
+    
     public function store(Request $request)
     {
      

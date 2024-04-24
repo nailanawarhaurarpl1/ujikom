@@ -10,10 +10,11 @@ use DB;
 class MemberController extends Controller
 {
     public function showMembers()
-    {
-        $users = User::all(); // Ambil semua data pengguna dari basis data
-        return view('admin.member', compact('users')); // Kirim data pengguna ke tampilan
-    }
+{
+    $users = User::where('roles', 'member')->get(); // Retrieve only members data from the database
+    return view('admin.member', compact('users')); // Pass user data to the view
+}
+
 
     public function dashboard()
     {
@@ -28,4 +29,6 @@ class MemberController extends Controller
         $data = $users->values();
         return view('admin.dashboard', compact('totalMembers','labels','data'));
     }
+
+    
 }

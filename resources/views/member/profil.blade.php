@@ -262,7 +262,7 @@
             <div class="card-body">
                 
                 <table style="margin-left: 4px; width: 480px; height: 165px" border="0">
-                    <i class="fa fa-pen fa-xs edit" style="margin-right: 230px"></i>
+                  
                     <center>
                         <br>
                         <div class="profile">

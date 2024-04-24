@@ -14,25 +14,29 @@
             <div class="modal-body">
                 <table border="0" width="460px" style="color: black;">
                     <tr>
+                        <td><br> Role <br><br></td>
+                        <td>: <span id="user-roles"></span><br></td>
+                    </tr>
+                    <tr>
                         <td><br> Nama Pengguna <br><br></td>
                         <td>: <span id="user-name"></span><br></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td><br> Email <br><br></td>
                         <td>: <span id="user-email"></span><br></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td style="text-align: right;"><span id="user-created-at" style="font-size: 10px;"></span><br></td>
                     </tr>
+                    
                 </table>
             </div>
         </div>
     </div>
 </div>
-<!-- End Modal  -->
+
+
 
 <div class="row">
     <div class="col-12 grid-margin">
@@ -43,6 +47,7 @@
                         <thead>
                             <tr>
                                 <th><p style="color: #114232; font-size: 17px"><b> No </b></p></th>
+                                <th><p style="color: #114232; font-size: 17px"><b> Tanggal Daftar </b></p></th>
                                 <th><p style="color: #114232; font-size: 17px"><b> Role </b></p></th>
                                 <th><p style="color: #114232; font-size: 17px"><b> Nama Pengguna </b></p></th>
                                 <th><p style="color: #114232; font-size: 17px"><b> Email </b></p></th>
@@ -51,31 +56,33 @@
                         </thead>
                         <tbody>
                             @php
-                                $number = 1;
+                                $number = 0; // Ubah inisialisasi $number menjadi 0
                             @endphp
-                            
-                            @foreach($users as $user)
-                                @if($user->roles == 'member')
-                                    <tr>
-                                        <td><p style="color: black; font-size: "><b>{{ $number }}</b></p></td>
-                                        <td><p style="color: black; font-size: "><b>{{ $user->roles }}</b></p></td>
-                                        <td id="user-name-{{ $loop->iteration }}"><p style="color: black; font-size: "><b>{{ $user->name }}</b></p></td>
-                                        <td id="user-email-{{ $loop->iteration }}"><p style="color: black; font-size: "><b>{{ $user->email }}</b></p></td>
-                                        <td> 
-                                            <div class="action-icons">
-                                                <p style="color: black; font-size: "><b>
-                                                    <a href="#" class="user-detail" data-baris="{{ $loop->iteration }}" data-toggle="modal" data-target="#DataUsers">
-                                                        &nbsp;&nbsp;<i class="bi bi-eye" style="font-size: 18px"></i>
-                                                    </a>
-                                                </b></p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @php
-                                        $number++;
-                                    @endphp
-                                @endif
-                            @endforeach
+                           @foreach($users as $user)
+                           @if($user->roles == 'member')
+                               @php
+                                   $number++; // Increment $number for each member user
+                                   $formattedDate = \Carbon\Carbon::parse($user->created_at)->format('d-m-Y');
+                               @endphp
+                               <tr>
+                                   <td><p style="color: black; font-size: "><b>{{ $number }}</b></p></td>
+                                   <td id="user-created-at-{{ $loop->iteration }}"><p style="color: black; font-size: "><b>{{ $formattedDate }}</b></p></td>
+                                   <td id="user-roles-{{ $loop->iteration }}"><p style="color: black; font-size: "><b>{{ $user->roles }}</b></p></td>
+                                   <td id="user-name-{{ $loop->iteration }}"><p style="color: black; font-size: "><b>{{ $user->name }}</b></p></td>
+                                   <td id="user-email-{{ $loop->iteration }}"><p style="color: black; font-size: "><b>{{ $user->email }}</b></p></td>
+                                   <td> 
+                                       <div class="action-icons">
+                                           <p style="color: black; font-size: "><b>
+                                               <a href="#" class="user-detail" data-number="{{ $number }}" data-baris="{{ $loop->iteration }}" data-toggle="modal" data-target="#DataUsers">
+                                                   <i class="bi bi-eye" style="font-size: 18px; margin-left: 10px"></i>
+                                               </a>
+                                           </b></p>
+                                       </div>
+                                   </td>
+                               </tr>
+                           @endif
+                       @endforeach
+                       
                         </tbody>
                     </table>
                 </div>
@@ -87,15 +94,22 @@
 
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Perubahan pada script JavaScript -->
 <script>
     $(document).ready(function() {
         $('.user-detail').click(function() {
             console.log('Klik berhasil');
             var nomorBaris = $(this).data('baris');
+            var nomorUrut = $(this).data('number');
             var nama = $('#user-name-' + nomorBaris).text();
+            var roles = $('#user-roles-' + nomorBaris).text();
             var email = $('#user-email-' + nomorBaris).text();
+            var created_at = $('#user-created-at-' + nomorBaris).text();
             $('#user-name').text(nama);
+            $('#user-roles').text(roles);
             $('#user-email').text(email);
+            $('#user-created-at').text(created_at);
+            $('#user-number').text(nomorUrut); // Tampilkan nomor urut di modal
         });
     });
 </script>
