@@ -55,7 +55,7 @@
                           </a>
                       @endforeach
                       <div class="dropdown-divider"></div>
-                      <p class="p-3 mb-0 text-center" style="color: #000000">Lihat semua notifikasi</p>
+                     
                   </div>
               @endif
           </li>
