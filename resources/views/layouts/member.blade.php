@@ -36,6 +36,7 @@
         <!-- partial:partials/_navbar.html -->
         
         @include('partials.navbar')
+        
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper" style="background-color: white">

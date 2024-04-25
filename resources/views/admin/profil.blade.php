@@ -253,7 +253,7 @@
                             <td>admin@gmail.com</td>
                         </tr>
                         <tr>
-                            <td>Password</td>
+                            <td>Sandi</td>
                             <td>:</td>
                             <td>123</td>
                         </tr>

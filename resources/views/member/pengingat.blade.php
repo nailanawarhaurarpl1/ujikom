@@ -150,7 +150,7 @@
         <!-- Modal content-->
         <div class="modal-content" style="background-color: #E1F0DA; color: black;">
           <div class="modal-header">
-            <h3>Edit Data</h3>
+            <h3>Edit Pengingat</h3>
             <button type="button" class="close" data-dismiss="modal">&times; &nbsp;&nbsp;</button>
             
           </div>

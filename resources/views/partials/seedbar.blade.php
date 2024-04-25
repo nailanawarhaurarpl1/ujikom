@@ -24,7 +24,7 @@
   </div>
   <ul class="nav">
     
-   
+{{--    
     <li class="nav-item menu-items">
       <a class="nav-link" href="/member/dashboard">
         <span class="menu-icon">
@@ -32,7 +32,7 @@
         </span>
         <span class="menu-title">Statistika</span>
       </a>
-    </li>
+    </li> --}}
     {{-- <li class="nav-item menu-items">
       <a class="nav-link" href="/member/kategori">
         <span class="menu-icon">

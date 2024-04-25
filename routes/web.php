@@ -57,9 +57,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'member'])->group(function () {
     
-    Route::get('/member/dashboard', function () {
-        return view('member.dashboard');
-    });
+    Route::get('/member/dashboard', [MemberController::class, 'statistika']);
+
 
 
 

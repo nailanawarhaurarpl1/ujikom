@@ -26,11 +26,12 @@
       </button>
 
       <ul class="navbar-nav navbar-nav-right">
-          @php
-              // Ambil data pengingat dengan tanggal hari ini untuk pengguna yang login
-              $pengingatHariIni = \App\Models\Pengingat::whereDate('tanggal', now()->toDateString())
-                                   ->where('id_user', auth()->id())->get();
-          @endphp
+        @php
+        // Ambil data pengingat dengan tanggal hari ini untuk pengguna yang login
+        $pengingatHariIni = \App\Models\Pengingat::whereDate('tanggal', now()->toDateString())
+                                ->where('id_user', auth()->id())->get();
+    @endphp
+    
           <li class="nav-item dropdown border-left">
               <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                   <i class="mdi mdi-bell"></i>
